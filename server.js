@@ -15,10 +15,18 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/budget", {
-  useNewUrlParser: true,
-  useFindAndModify: false
-});
+const DB = process.env.DATABASE.replace("<PASSWORD>", process.env.DB_PWD);
+
+// if (!DB) DB = process.env.LOCALHOST;
+
+mongoose
+  .connect(DB, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
+  .then(() => console.log(`DB connection successful`))
+  .catch((err) => console.log(err));
 
 // routes
 app.use(require("./routes/api.js"));
