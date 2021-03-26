@@ -2,6 +2,9 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const compression = require("compression");
+const dotenv = require("dotenv");
+
+dotenv.config({ path: "./.env" });
 
 const PORT = 3000;
 
@@ -17,7 +20,7 @@ app.use(express.static("public"));
 
 const DB = process.env.DATABASE.replace("<PASSWORD>", process.env.DB_PWD);
 
-// if (!DB) DB = process.env.LOCALHOST;
+if (!DB) DB = process.env.LOCALHOST;
 
 mongoose
   .connect(DB, {
