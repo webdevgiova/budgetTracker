@@ -18,12 +18,12 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-const DB = process.env.DATABASE.replace("<PASSWORD>", process.env.DB_PWD);
+// const DB = process.env.DATABASE.replace("<PASSWORD>", process.env.DB_PWD);
 
-if (!DB) DB = process.env.LOCALHOST;
+// if (!DB) DB = process.env.LOCALHOST;
 
 mongoose
-  .connect(DB, {
+  .connect(process.env.DATABASE || dotenv.LOCALHOST, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
