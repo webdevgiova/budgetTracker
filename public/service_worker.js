@@ -2,6 +2,8 @@ const FILES_TO_CACHE = [
   "/",
   "/index.html",
   "/index.js",
+
+  "DBindexed.js",
   "/favicon.ico",
   "/styles.css",
   "/icons/icon-144x144.png",
@@ -11,6 +13,14 @@ const FILES_TO_CACHE = [
 
 const CACHE_NAME = "static-cache-v2";
 const DATA_CACHE_NAME = "data-cache-v1";
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/service_worker.js").then((reg) => {
+      console.log("Service worker registered.", reg);
+    });
+  });
+}
 
 self.addEventListener("install", function (evt) {
   evt.waitUntil(
